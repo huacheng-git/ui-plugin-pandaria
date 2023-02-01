@@ -1,16 +1,19 @@
 export function init($plugin, store) {
-  // const { product } = $plugin.DSL(store, $plugin.name);
   const { virtualType, basicType } = $plugin.DSL(store, 'explorer');
 
+  // app in sidebar
+  // product({});
+
   virtualType({
-    label:      'macvlan',
-    labelKey:   'nav.vlanSubnet.label',
-    name:       'macvlan-subnet',
+    label:      'macvlanV2',
+    // labelKey:   'nav.vlanSubnet.label',
+    name:       'macvlanV2',
     group:      'cluster',
     namespaced: false,
     icon:       'globe',
     route:      { name: 'macvlan-c-cluster' },
     exact:      true
   });
-  basicType(['macvlan-subnet'], 'cluster');
+
+  basicType(['macvlanV2'], 'cluster');
 }
