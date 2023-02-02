@@ -12,12 +12,12 @@ entries:
       catalog.cattle.io/ui-component: plugins
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-01-31T11:53:01.569725+08:00"
+    created: "2023-02-02T14:36:41.660524+08:00"
     description: macvlan plugin
-    digest: 133f02481386d0df8d05c019b46fa07d8acbef38bd2848f383331ec9a18b6bb8
+    digest: 523e4e3490dae425d9f671ff0a3c3037fe91fbf6cddc7e33d78859188e13279b
     name: macvlan
     type: application
     urls:
     - assets/macvlan/macvlan-0.1.0.tgz
     version: 0.1.0
-generated: "2023-01-31T11:53:01.568588+08:00"
+generated: "2023-02-02T14:36:41.660007+08:00"
