@@ -1,7 +1,7 @@
 import { importTypes } from '@rancher/auto-import';
 import { IPlugin } from '@shell/core/types';
 import macvlanRouting from './routing/macvlan-routing';
-import macvlanStore from './store/macvlan-store';
+import macvlanStore from './store/macvlan-store/index.js';
 
 // Init the package
 export default function($plugin: IPlugin) {

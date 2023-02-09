@@ -20,44 +20,24 @@ const schema = {
   metadata: { name: 'macvlan Create' },
 };
 
-const emptyForm = {
-  apiVersion: 'macvlan.cluster.cattle.io/v1',
-  kind:       'MacvlanSubnet',
-  metadata:   {
-    name:      '',
-    namespace: 'kube-system',
-    labels:    { project: '' },
-  },
-  spec: {
-    master:            '',
-    vlan:              0,
-    cidr:              '',
-    mode:              'bridge',
-    gateway:           '',
-    ranges:            [],
-    routes:            [],
-    podDefaultGateway: {
-      enable:      false,
-      serviceCidr: ''
-    }
-  }
-};
-
 export default {
-  name:       'MacvlanResourceCreate',
+  name:       'MacvlanResourceDetails',
   components: {
     Loading, LabeledInput, Masthead, Tabbed, Tab, AsyncButton, LabeledSelect,
   },
   mixins: [],
 
-  fetch() {
+  async fetch() {
+    const config = await this.$store.dispatch('macvlan/loadMacvlan', { cluster: this.currentCluster.id, resource: this.$route.params?.id });
+
+    this.$set(this, 'config', config);
   },
 
   data() {
     return {
       resource:    MACVLAN_PRODUCT_NAME,
-      config:      emptyForm,
-      mode:        'create',
+      config:      {},
+      mode:        'edit',
       schema,
       tabErrors:   {},
       errors:      [],
@@ -121,9 +101,9 @@ export default {
 
   methods: {
     save(btnCb) {
-      this.$store.dispatch('macvlan/createMacvlan', {
-        cluster: this.currentCluster.id,
-        params:  this.config
+      this.$store.dispatch('macvlan/updateMacvlan', {
+        cluster:  this.currentCluster.id,
+        resource: this.config
       }).then((res) => {
         btnCb(true);
         this.cancel();
@@ -132,6 +112,9 @@ export default {
     cancel() {
       this.$router.push({ name: `${ MACVLAN_PRODUCT_NAME }-c-cluster` });
     },
+    detailPageHeaderActionOverride() {
+      return this.$route.params?.id;
+    }
   }
 };
 </script>
@@ -145,6 +128,7 @@ export default {
     <Masthead
       :schema="schema"
       :resource="resource"
+      :mode="mode"
       :value="mastheadData"
     >
     </Masthead>
@@ -156,6 +140,7 @@ export default {
           label-key="generic.name"
           placeholder-key="nameNsDescription.name.placeholder"
           :mode="mode"
+          :disabled="true"
         />
       </div>
     </div>
@@ -177,6 +162,7 @@ export default {
               label-key="macvlan.master.label"
               placeholder-key="macvlan.master.placeholder"
               :mode="mode"
+              :disabled="true"
             />
           </div>
           <div class="col span-6">
@@ -185,6 +171,7 @@ export default {
               label-key="macvlan.vlan.label"
               placeholder-key="macvlan.vlan.placeholder"
               :mode="mode"
+              :disabled="true"
               @input="$set(config.spec, 'vlan', Number($event));"
             />
           </div>
@@ -198,6 +185,7 @@ export default {
               label-key="macvlan.cidr.label"
               placeholder-key="macvlan.cidr.placeholder"
               :mode="mode"
+              :disabled="true"
             />
           </div>
           <div class="col span-6">
@@ -208,6 +196,7 @@ export default {
               label-key="macvlan.mode.label"
               :options="modeOptions"
               option-label="label"
+              :disabled="true"
               @input="$emit('updateVersion', $event)"
             />
           </div>
@@ -220,6 +209,7 @@ export default {
               label-key="macvlan.gateway.label"
               placeholder-key="macvlan.gateway.placeholder"
               :mode="mode"
+              :disabled="true"
             />
           </div>
           <div class="col span-6">
@@ -230,6 +220,7 @@ export default {
               label-key="macvlan.project.label"
               :options="projectOptions"
               option-label="label"
+              :disabled="true"
               @input="$emit('updateVersion', $event)"
             />
           </div>
@@ -242,6 +233,7 @@ export default {
               label-key="macvlan.ipReuse.label"
               placeholder-key="macvlan.ipReuse.placeholder"
               :mode="mode"
+              :disabled="true"
             />
           </div>
         </div>

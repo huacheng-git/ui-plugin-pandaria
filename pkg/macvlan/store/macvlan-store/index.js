@@ -1,13 +1,12 @@
-import { CoreStoreSpecifics, CoreStoreConfig } from '@shell/core/types';
 import { MACVLAN_STORE } from '../../types';
 import getters from './getters';
 import mutations from './mutations';
 import actions from './actions';
 
-const elementalFactory = (): CoreStoreSpecifics => {
+const elementalFactory = () => {
   return {
     state() {
-      return { macvlanList: [] };
+      return { macvlanList: [], macvlan: {} };
     },
 
     getters: { ...getters },
@@ -17,7 +16,7 @@ const elementalFactory = (): CoreStoreSpecifics => {
     actions: { ...actions },
   };
 };
-const config: CoreStoreConfig = { namespace: MACVLAN_STORE };
+const config = { namespace: MACVLAN_STORE };
 
 export default {
   specifics: elementalFactory(),
