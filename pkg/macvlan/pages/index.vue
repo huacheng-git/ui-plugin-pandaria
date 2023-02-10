@@ -29,10 +29,10 @@ export default {
     };
   },
   fetch() {
-    const { cluster, namespaces, perPage } = this;
+    const { currentCluster, namespaces, perPage } = this;
 
     this.$store.dispatch('macvlan/loadMacvlans', {
-      cluster: cluster?.id,
+      cluster: currentCluster?.id,
       params:  { labelSelector: namespaces, limit: perPage }
     });
   },
