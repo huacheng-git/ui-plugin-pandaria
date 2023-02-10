@@ -18,7 +18,7 @@ export default {
     const { dispatch } = this;
 
     dispatch('management/request', {
-      url:    `/k8s/clusters/${ cluster }/apis/macvlan.cluster.cattle.io/v1/namespaces/kube-system/macvlansubnets?limit=-1`,
+      url:    `/k8s/clusters/${ cluster }/apis/macvlan.cluster.cattle.io/v1/namespaces/kube-system/macvlansubnets`,
       method: 'POST',
       data:   params,
     });
