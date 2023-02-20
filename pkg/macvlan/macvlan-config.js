@@ -1,20 +1,19 @@
 import { MACVLAN_PRODUCT_NAME } from './config/macvlan-types';
 
 export function init($plugin, store) {
-  const { virtualType, basicType } = $plugin.DSL(store, 'explorer');
-
-  // app in sidebar
-  // product({});
+  const { virtualType, basicType, configureType } = $plugin.DSL(store, 'explorer');
 
   virtualType({
-    label:      'macvlanV2',
-    // labelKey:   'nav.vlanSubnet.label',
-    name:       'macvlanV2',
+    showMenuFun(state, getters, rootState, rootGetters) {
+      return !rootGetters['cluster/schemaFor'](MACVLAN_PRODUCT_NAME);
+    },
+    labelKey:   'macvlan.nav.label',
+    name:       'macvlan-install',
     group:      'cluster',
     namespaced: false,
-    icon:       'globe',
+    icon:       'folder',
     route:      {
-      name:   'macvlan-c-cluster',
+      name:   `${ MACVLAN_PRODUCT_NAME }-c-cluster-resource-install`,
       params: {
         product:  'explor',
         resource: MACVLAN_PRODUCT_NAME
@@ -22,6 +21,11 @@ export function init($plugin, store) {
     },
     exact: true
   });
+  configureType(MACVLAN_PRODUCT_NAME, {
+    isCreatable: true,
+    isEditable:  true,
+    showState:   false,
+  });
 
-  basicType(['macvlanV2'], 'cluster');
+  basicType([MACVLAN_PRODUCT_NAME, 'macvlan-install'], 'cluster');
 }

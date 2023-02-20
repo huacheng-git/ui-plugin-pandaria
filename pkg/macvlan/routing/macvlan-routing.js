@@ -1,23 +1,17 @@
-import { MACVLAN_PRODUCT_NAME } from '../config/macvlan-types';
-import ListMacvlanResource from '../pages/index.vue';
-import CreateMacvlanResource from '../pages/_resource/create.vue';
-import MacvlanResourceDetails from '../pages/_resource/_id.vue';
+import { MACVLAN_PRODUCT_NAME, MACVLAN_IP_PRODUCT_NAME } from '../config/macvlan-types';
+import MacvlanResourceIps from '../pages/macvlanIp.vue';
+import InstallView from '../components/InstallView.vue';
 
 const routes = [
   {
-    name:      `${ MACVLAN_PRODUCT_NAME }-c-cluster`,
-    path:      '/:product/c/:cluster/:resource',
-    component: ListMacvlanResource
+    name:      `${ MACVLAN_PRODUCT_NAME }-c-cluster-resource-install`,
+    path:      '/c/:cluster/:product/:resource/install',
+    component: InstallView
   },
   {
-    name:      `${ MACVLAN_PRODUCT_NAME }-c-cluster-resource-create`,
-    path:      `/:product/c/:cluster/:resource/create`,
-    component: CreateMacvlanResource,
-  },
-  {
-    name:      `${ MACVLAN_PRODUCT_NAME }-c-cluster-resource-edit`,
-    path:      `/:product/c/:cluster/:resource/:id`,
-    component: MacvlanResourceDetails,
+    name:      `${ MACVLAN_IP_PRODUCT_NAME }-c-cluster-resource-ip`,
+    path:      `/:product/c/:cluster/:resource/ip/:id`,
+    component: MacvlanResourceIps,
   },
 ];
 

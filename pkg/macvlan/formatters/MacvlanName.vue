@@ -1,4 +1,6 @@
 <script>
+import { MACVLAN_IP_PRODUCT_NAME } from '../config/macvlan-types';
+
 export default {
   props: {
     value: {
@@ -14,17 +16,26 @@ export default {
   },
 
   data() {
-    return {};
+    return {
+      getStartedLink: {
+        name:   `${ MACVLAN_IP_PRODUCT_NAME }-c-cluster-resource-ip`,
+        params: { id: this.row.metadata.name }
+      },
+    };
   },
 
-  computed: {}
+  computed: {
+    totalCount() {
+      return this.row?.metadata?.annotations?.macvlanipCount || 0;
+    }
+  }
 };
 </script>
 
 <template>
   <n-link
-    to="/href"
+    :to="getStartedLink"
   >
-    {{ row.metadata.name }}
+    <span v-tooltip="{ content: `<div style='font-size: 12px;line-height: 20px;'>${row.nameDisplay}<br>${t('macvlan.macvlanIp.totalCount')}：${totalCount}</div>`, html: true }">{{ row.metadata.name }}</span>
   </n-link>
 </template>

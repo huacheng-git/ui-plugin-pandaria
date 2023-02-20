@@ -102,6 +102,10 @@ storybook-static/
 
 # Packages
 dist-pkg
+assets
+charts
+extensions
+index.yaml
 
 # Others
 .todo
