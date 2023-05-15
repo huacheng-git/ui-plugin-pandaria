@@ -115,9 +115,6 @@ export default {
 
       return out;
     },
-    getLabelSelector() {
-
-    },
   },
 };
 </script>

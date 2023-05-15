@@ -1,5 +1,4 @@
 <script>
-import Loading from '@shell/components/Loading';
 import LabeledInput from '@components/Form/LabeledInput/LabeledInput.vue';
 import LabeledSelect from '@shell/components/form/LabeledSelect.vue';
 import { MANAGEMENT } from '@shell/config/types';
@@ -20,7 +19,6 @@ export default {
   name:       'MacvlanResourceCreate',
   mixins:     [CreateEditView, FormValidation],
   components: {
-    Loading,
     LabeledInput,
     Tabbed,
     Tab,
@@ -365,12 +363,7 @@ export default {
 </script>
 
 <template>
-  <Loading
-    v-if="$fetchState.pending"
-    :delayed="true"
-  />
   <CruResource
-    v-else
     :done-route="doneRoute"
     :validation-passed="fvFormIsValid"
     :resource="config"

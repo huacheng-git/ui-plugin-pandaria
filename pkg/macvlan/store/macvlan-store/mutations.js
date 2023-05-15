@@ -1,4 +1,4 @@
-import { removeObject } from '@shell/utils/array.ts';
+import { removeObject } from '@shell/utils/array';
 
 export default {
   setMacvlanList(state, val) {

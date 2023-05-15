@@ -40,28 +40,28 @@ export default {
     headers() {
       return [
         {
-          name:      'subnet',
-          label:     'Name',
-          labelKey:  'tableHeaders.name',
-          value:     'subnet',
+          name:     'subnet',
+          label:    'Name',
+          labelKey: 'tableHeaders.name',
+          value:    'subnet',
         },
         {
-          name:      'namespace',
-          label:     'Namespace',
-          labelKey:  'tableHeaders.namespace',
-          value:     'namespace',
+          name:     'namespace',
+          label:    'Namespace',
+          labelKey: 'tableHeaders.namespace',
+          value:    'namespace',
         },
         {
-          name:      'podName',
-          label:     'Workload',
-          labelKey:  'macvlan.tableHeaders.workload',
-          value:     'podName',
+          name:     'podName',
+          label:    'Workload',
+          labelKey: 'macvlan.tableHeaders.workload',
+          value:    'podName',
         },
         {
-          name:      'ip',
-          label:     'IP',
-          labelKey:  'macvlan.tableHeaders.ip',
-          value:     'ip',
+          name:     'ip',
+          label:    'IP',
+          labelKey: 'macvlan.tableHeaders.ip',
+          value:    'ip',
         },
       ];
     },
@@ -250,7 +250,11 @@ export default {
               class="main-row multi-pod"
               :data-node-id="row.key"
             >
-              <td colspan="3" class="text-center" style="text-indent: -100px;">
+              <td
+                colspan="3"
+                class="text-center"
+                style="text-indent: -100px;"
+              >
                 <button
                   type="button"
                   class="btn btn-sm bg-primary role-line"
